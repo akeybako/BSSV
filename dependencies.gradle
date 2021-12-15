@@ -1,0 +1,5 @@
+ext.versions = [
+        // di
+        hiltCoreVersion: '2.40.1',
+        hiltVersion    : '1.0.0'
+]
