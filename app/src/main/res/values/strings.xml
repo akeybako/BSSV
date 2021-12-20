@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">BSSV</string>
+
+    <!-- User -->
+    <string name="follower">フォロワー: %s</string>
+    <string name="following">フォロー: %s</string>
+
+    <!-- Utility -->
+    <string name="error_on_open_browser">ブラウザが見つかりませんでした</string>
+
 </resources>
