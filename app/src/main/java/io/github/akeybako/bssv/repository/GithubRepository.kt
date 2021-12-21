@@ -6,6 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.github.akeybako.bssv.network.GithubService
 import io.github.akeybako.bssv.ui.user.Repo
+import io.github.akeybako.bssv.ui.user.SearchResult
 import io.github.akeybako.bssv.ui.user.User
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
@@ -23,7 +24,14 @@ class GithubRepository @Inject constructor(
     ) = flow {
         val response = githubService.fetchUsers(q)
         response.suspendOnSuccess {
-            emit(data)
+            data.items.map {
+                SearchResult(
+                    name = it.login,
+                    avatarUrl = it.avatarUrl
+                )
+            }.let {
+                emit(it)
+            }
         }
     }.flowOn(ioDispatcher)
 

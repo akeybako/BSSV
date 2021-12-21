@@ -34,8 +34,6 @@ class SearchViewModel @Inject constructor(
     val userFlow = keywordSharedFlow.flatMapLatest {
         githubRepository.fetchUsers(
             q = it
-        ).map { response ->
-            response.items
-        }
+        )
     }
 }

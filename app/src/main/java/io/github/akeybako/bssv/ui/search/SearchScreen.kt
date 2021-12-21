@@ -11,7 +11,11 @@ import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.*
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
@@ -28,7 +32,7 @@ import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import io.github.akeybako.bssv.navigation.AppDestination
-import io.github.akeybako.bssv.network.GithubSearchUser
+import io.github.akeybako.bssv.ui.user.SearchResult
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -60,7 +64,7 @@ fun SearchScreen(
                 UserItem(
                     modifier = Modifier
                         .clickable {
-                            navController.navigate("${AppDestination.User.route}/${it.login}")
+                            navController.navigate("${AppDestination.User.route}/${it.name}")
                         },
                     user = it
                 )
@@ -131,7 +135,7 @@ fun SearchTopBar(
 @Composable
 fun UserItem(
     modifier: Modifier = Modifier,
-    user: GithubSearchUser
+    user: SearchResult
 ) {
     ConstraintLayout(
         modifier = modifier.padding(all = 8.dp)
@@ -158,7 +162,7 @@ fun UserItem(
                 end.linkTo(avatarRef.end)
                 top.linkTo(avatarRef.bottom)
             },
-            text = user.login,
+            text = user.name,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )
@@ -181,6 +185,6 @@ fun PreviewSearchTopBar() {
 fun PreviewUserItem() {
     UserItem(
         modifier = Modifier.width(100.dp),
-        user = GithubSearchUser(login = "aaa", avatarUrl = "aaaa")
+        user = SearchResult(name = "aaa", avatarUrl = "aaaa")
     )
 }
