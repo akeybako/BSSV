@@ -1,4 +1,4 @@
-package io.github.akeybako.bssv
+package io.github.akeybako.bssv.ui.search
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
@@ -27,13 +27,11 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
+import io.github.akeybako.bssv.navigation.AppDestination
 import io.github.akeybako.bssv.network.GithubSearchUser
-import io.github.akeybako.bssv.search.SearchViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 
-@ExperimentalFoundationApi
-@ExperimentalCoroutinesApi
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SearchScreen(
     viewModel: SearchViewModel,
@@ -62,7 +60,7 @@ fun SearchScreen(
                 UserItem(
                     modifier = Modifier
                         .clickable {
-                            navController.navigate("users/" + it.login)
+                            navController.navigate("${AppDestination.User.route}/${it.login}")
                         },
                     user = it
                 )

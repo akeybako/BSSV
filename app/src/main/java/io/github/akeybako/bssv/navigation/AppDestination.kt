@@ -9,5 +9,9 @@ sealed class AppDestination(val route: String) {
     /**
      * ユーザー画面
      */
-    object User: AppDestination("users/{username}")
+    object User : AppDestination("users") {
+        const val routeWithArgument: String = "users/{username}"
+
+        const val argument0: String = "username"
+    }
 }

@@ -1,4 +1,4 @@
-package io.github.akeybako.bssv.user
+package io.github.akeybako.bssv.ui.user
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

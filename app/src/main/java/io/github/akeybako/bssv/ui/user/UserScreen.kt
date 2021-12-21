@@ -1,4 +1,4 @@
-package io.github.akeybako.bssv.user
+package io.github.akeybako.bssv.ui.user
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*

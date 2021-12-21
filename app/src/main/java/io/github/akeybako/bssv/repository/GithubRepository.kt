@@ -1,20 +1,16 @@
 package io.github.akeybako.bssv.repository
 
-import com.skydoves.sandwich.message
-import com.skydoves.sandwich.onError
-import com.skydoves.sandwich.onException
 import com.skydoves.sandwich.suspendOnSuccess
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.github.akeybako.bssv.network.GithubService
-import io.github.akeybako.bssv.user.Repo
-import io.github.akeybako.bssv.user.User
+import io.github.akeybako.bssv.ui.user.Repo
+import io.github.akeybako.bssv.ui.user.User
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.onCompletion
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -23,17 +19,13 @@ class GithubRepository @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher
 ) {
     suspend fun fetchUsers(
-        q: String,
-        onComplete: () -> Unit,
-        onError: (String?) -> Unit
+        q: String
     ) = flow {
         val response = githubService.fetchUsers(q)
         response.suspendOnSuccess {
             emit(data)
         }
-            .onError { onError(message()) }
-            .onException { onError(message) }
-    }.onCompletion { onComplete() }.flowOn(ioDispatcher)
+    }.flowOn(ioDispatcher)
 
     suspend fun fetchUser(
         username: String
@@ -50,9 +42,7 @@ class GithubRepository @Inject constructor(
                 )
             )
         }
-            .onError {}
-            .onException { }
-    }.onCompletion { }.flowOn(ioDispatcher)
+    }.flowOn(ioDispatcher)
 
     suspend fun fetchRepos(
         username: String
@@ -74,7 +64,5 @@ class GithubRepository @Inject constructor(
                     emit(it)
                 }
         }
-            .onError {}
-            .onException { }
-    }.onCompletion { }.flowOn(ioDispatcher)
+    }.flowOn(ioDispatcher)
 }

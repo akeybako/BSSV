@@ -1,4 +1,4 @@
-package io.github.akeybako.bssv.search
+package io.github.akeybako.bssv.ui.search
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
@@ -30,12 +30,10 @@ class SearchViewModel @Inject constructor(
         keywordSharedFlow.tryEmit(_keyword.value)
     }
 
-    @ExperimentalCoroutinesApi
+    @OptIn(ExperimentalCoroutinesApi::class)
     val userFlow = keywordSharedFlow.flatMapLatest {
         githubRepository.fetchUsers(
-            q = it,
-            onComplete = {},
-            onError = {}
+            q = it
         ).map { response ->
             response.items
         }
