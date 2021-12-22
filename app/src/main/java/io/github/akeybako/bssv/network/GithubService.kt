@@ -28,6 +28,7 @@ interface GithubService {
      */
     @GET("users/{username}/repos")
     suspend fun fetchRepos(
-        @Path("username") name: String
+        @Path("username") name: String,
+        @Query("per_page") perPage: Int = 100
     ): ApiResponse<List<GithubReposResponse>>
 }
