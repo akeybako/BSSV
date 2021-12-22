@@ -17,6 +17,7 @@ ext.versions = [
 
         // aac
         lifecycleVersion        : '2.4.0',
+        roomVersion             : '2.4.0-alpha04',
 
         // di
         hiltCoreVersion         : '2.40.2',
